@@ -7,31 +7,51 @@ function snake() {
 	this.yspeed = 0;
 	this.total = 0;
 	this.last_moving_direction;
+	this.pellet_active = false;
 	this.tail = [];
+	this.ate_super = false;
 	//update function running on each frame refresh...
 	this.update = function() {
-	for(var i=0; i< this.tail.length-1; i++) {
-		this.tail[i] = this.tail[i+1];
-	}
+			for(var i=0; i< this.tail.length-1; i++) {
+				this.tail[i] = this.tail[i+1];
+			}
 
+		//logic for death if snake bites itself
 	for (var i=0; i< this.tail.length; i++) {
 		if (this.x == this.tail[i].x && this.y == this.tail[i].y) {
-			this.gameOver();
+			if(!this.ate_super) {
+				this.gameOver();
+			}
 		}
 	}
 
-	
+	//checking wall collision	
 	if( abs(this.x-windowWidth) <72 || abs(this.y-windowHeight) <this.sHeight+3 || this.x == 0 || this.y==0 ) {
-		this.gameOver();
-		return;
+		if(!this.ate_super) {
+			this.gameOver();
+			return;
+		}
+		
 	}
-	this.tail[this.total-1] = createVector(this.x, this.y, this.sWidth, this.sHeight);
-
+		this.tail[this.total-1] = createVector(this.x, this.y, this.sWidth, this.sHeight);
+	
 		this.x += this.xspeed*diffLevel;
 		this.x = constrain(this.x, 0, windowWidth-67);
 		this.y += this.yspeed*diffLevel;
 		this.y = constrain(this.y, 0, windowHeight-this.sHeight);
-	}
+
+		//invoke super power pellet
+		if(this.total%2 ==0 && !(pellet_flag_tracker.includes(this.total)) && this.total!==0 ) {
+				//invoke super power peller
+				pellet_flag_tracker.push(this.total);
+				pickLocForPellet();
+				this.pellet_active = true;
+				setTimeout(function() {
+					this.s.pellet_active = false;
+					pelletPosition= undefined;
+				}, 6000);
+			}
+		}
 
 	//code for what happens on death of snake
 
@@ -53,12 +73,17 @@ function snake() {
 	}
 	//drawing of snake on canvas
 	this.show = function() {
-		fill('black');
+		if(!this.ate_super) {
+			fill('black');
+		}
+		if(this.ate_super) {
+			fill('blue');
+		}
 		for(var i=0; i< this.total; i++) {
 			ellipse(this.tail[i].x+10, this.tail[i].y+10, this.sWidth, this.sHeight);
 		}
-		// rect(this.x, this.y, this.sWidth, this.sHeight);
 		
+		//different snake shapes on going down and up
 		if(this.yspeed !== 1) {
 			beginShape();
 			vertex(this.x+this.sWidth/2, this.y);
@@ -78,11 +103,23 @@ function snake() {
 			ellipse(this.x+(this.sWidth)*3/4, this.y+this.sHeight, 3, 3);
 		}
 		
+		
 	}
 	//what happens when snake eats Food
-	this.eat = function(){
-		this.total++;
-		pickLocForFood();
+	this.eat = function(type){
+		if(type == 'food') {
+			this.total++;
+			pickLocForFood();
+		}
+		if(type == 'super_pellet') {
+			this.ate_super = true;
+			setTimeout(function() {
+			this.s.ate_super = false;
+			}, 8000);
+			pelletPosition= undefined;
+		}
+		
+
 	}
 	//function to change direction of snake on arrow press
     this.dir= function(x, y) {
