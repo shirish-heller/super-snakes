@@ -55,9 +55,29 @@ function snake() {
 	this.show = function() {
 		fill('black');
 		for(var i=0; i< this.total; i++) {
-			rect(this.tail[i].x, this.tail[i].y, this.sWidth, this.sHeight);
+			ellipse(this.tail[i].x+10, this.tail[i].y+10, this.sWidth, this.sHeight);
 		}
-		rect(this.x, this.y, this.sWidth, this.sHeight);
+		// rect(this.x, this.y, this.sWidth, this.sHeight);
+		
+		if(this.yspeed !== 1) {
+			beginShape();
+			vertex(this.x+this.sWidth/2, this.y);
+			vertex(this.x, this.y+this.sHeight);
+			vertex(this.x+this.sWidth, this.y+this.sHeight);
+			endShape();
+			ellipse(this.x+this.sWidth/4, this.y, 3, 3);
+			ellipse(this.x+(this.sWidth)*3/4, this.y, 3, 3);
+		}
+		if(this.yspeed == 1) {
+			beginShape();
+			vertex(this.x+this.sWidth/2, this.y+this.sHeight);
+			vertex(this.x, this.y);
+			vertex(this.x+this.sWidth, this.y);
+			endShape();
+			ellipse(this.x+this.sWidth/4, this.y+this.sHeight, 3, 3);
+			ellipse(this.x+(this.sWidth)*3/4, this.y+this.sHeight, 3, 3);
+		}
+		
 	}
 	//what happens when snake eats Food
 	this.eat = function(){

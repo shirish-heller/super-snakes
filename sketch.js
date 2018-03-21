@@ -18,11 +18,10 @@ function draw() {
 		s.show();
 		fill (255, 0, 100);
 		stroke('red');
-		// ellipse(foodPosition.x+10, foodPosition.y+10, s.sWidth, s.sHeight);
-		// ellipse(foodPosition.x, foodPosition.y, 2, 2);
-		rect(foodPosition.x, foodPosition.y, s.sWidth, s.sHeight);
-		//checking if snake should eat food
-		if(( abs(s.x-foodPosition.x) < s.sWidth) && ( abs(s.y-foodPosition.y) < s.sHeight)) {
+		ellipse(foodPosition.x+10, foodPosition.y+10, s.sWidth, s.sHeight);
+		// fill (255, 0, 100, 0.4);
+		// rect(foodPosition.x, foodPosition.y, s.sWidth, s.sHeight);
+		if(( abs(s.x-foodPosition.x) < s.sWidth/2) && ( abs(s.y-foodPosition.y) < s.sHeight/2)) {
 			s.eat();
 		}
 	}
@@ -35,6 +34,7 @@ function pickLocForFood() {
 	foodPosition =createVector(floor (random(cols)), floor(random(rows)));
 	foodPosition.x = constrain (foodPosition.x * s.sWidth, 20, windowWidth-s.sWidth-60);
 	foodPosition.y = constrain (foodPosition.y * s.sHeight, 20, windowWidth-s.sHeight-20);
+	console.log(foodPosition);
 }
 // controls snnakes direction when arrow keys are pressed
 function keyPressed() {
