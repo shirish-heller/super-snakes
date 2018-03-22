@@ -16,4 +16,4 @@ super-snakes game written in Javascript
 4) eat all the food pellets to grow the snake and increase your score.
 5) After every some time a super pellet appears for limited time. If you eat that you will become immortal for some limited time.
 
-                            # HAPPY GAMING!!
+                                                  # HAPPY GAMING!!
