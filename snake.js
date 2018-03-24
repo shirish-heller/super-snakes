@@ -56,28 +56,28 @@ function snake() {
 	//code for what happens on death of snake
 
 	this.gameOver = function() {
-		fill(0, 102, 153);
+		fill('white');
 		textSize(70);
 		text('GAME OVER!!', windowWidth/15, windowHeight/2);
-		fill(255, 0, 100);
-		textSize(55);
-		text('SCORE:- ' + this.total, windowWidth/15, windowHeight/1.5);
+		fill('white');
+		textSize(25);
+		text('Score: ' + this.total, windowWidth/15, windowHeight/1.5);
 		if(window.localStorage.getItem('highscore') < this.total) {
 			window.localStorage.setItem('highscore', this.total);
 		}
-		fill(255, 0, 100);
-		textSize(55);
-		text('HIGHSCORE:- ' + window.localStorage.getItem('highscore'), windowWidth/15, windowHeight/1.25);
+		fill('white');
+		textSize(25);
+		text('Highscore ' + window.localStorage.getItem('highscore'), windowWidth/15, windowHeight/1.35);
 		this.xspeed=0;
 		this.yspeed=0;
 	}
 	//drawing of snake on canvas
 	this.show = function() {
 		if(!this.ate_super) {
-			fill('black');
+			fill('#268bd2');
 		}
 		if(this.ate_super) {
-			fill('blue');
+			fill('#fff');
 		}
 		for(var i=0; i< this.total; i++) {
 			ellipse(this.tail[i].x+10, this.tail[i].y+10, this.sWidth, this.sHeight);
