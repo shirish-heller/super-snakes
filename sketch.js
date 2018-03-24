@@ -13,20 +13,20 @@ function setup() {
 }
 //Draw function called every frame
 function draw() {
-	background('greenyellow');
-	stroke('black');
+	background('#002b36');
+	stroke('#002b36');
 	if(!gameOver) {
 		s.update();
 		s.show();
 		//food
-		fill (255, 0, 100);
-		stroke('red');
+		fill ('#b58900');
+		//stroke('#b58900');
 		ellipse(foodPosition.x+10, foodPosition.y+10, s.sWidth, s.sHeight);
-
+		//s.pellet_active = true;
 		//super_pellet
 		if(s.pellet_active) {
-			stroke('white');
-			fill('blue');
+			//stroke('yellow');
+			fill('#fff');
 			if(pelletPosition!==undefined)
 			ellipse(pelletPosition.x+10, pelletPosition.y+10, s.sWidth, s.sHeight);
 		}
