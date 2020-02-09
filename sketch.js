@@ -4,12 +4,13 @@ var foodPosition;
 var pelletPosition;
 var gameOver =false;
 var pellet_flag_tracker = [];
+var gameSpeed=15;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 	s = new snake();
 	pickLocForFood();
-	frameRate(10);
+	frameRate(this.gameSpeed);
 }
 //Draw function called every frame
 function draw() {
@@ -35,6 +36,7 @@ function draw() {
 		if(( abs(s.x-foodPosition.x) < s.sWidth/2) && ( abs(s.y-foodPosition.y) < s.sHeight/2)) {
 			var type = 'food';
 			s.eat(type);
+			this.gameSpeed+=10;
 		}
 
 		// when should a snake eat super_pellet
@@ -65,19 +67,23 @@ function pickLocForPellet() {
 	pelletPosition.x = constrain (pelletPosition.x * s.sWidth, 20, windowWidth-s.sWidth-60);
 	pelletPosition.y = constrain (pelletPosition.y * s.sHeight, 20, windowWidth-s.sHeight-20);
 }
-// controls snnakes direction when arrow keys are pressed
+// controls snakes direction when arrow keys are pressed
 function keyPressed() {
 	if(keyCode == UP_ARROW && (this.last_moving_direction!==DOWN_ARROW) ) {
-		s.dir(0, -1);
-		this.last_moving_direction = keyCode;
+			s.dir(0, -1);
+			this.last_moving_direction = keyCode;
+			s.y += s.yspeed*diffLevel;
 	} else if(keyCode == DOWN_ARROW && (this.last_moving_direction!==UP_ARROW)) {
-		s.dir(0, 1);
-		this.last_moving_direction = keyCode;
+			s.dir(0, 1);
+			this.last_moving_direction = keyCode;
+			s.y += s.yspeed*diffLevel;
 	}else if(keyCode == RIGHT_ARROW && (this.last_moving_direction!==LEFT_ARROW)) {
-		s.dir(1, 0);
-		this.last_moving_direction = keyCode;
+			s.dir(1, 0);
+			this.last_moving_direction = keyCode;
+			s.x += s.xspeed*diffLevel;
 	}else if(keyCode == LEFT_ARROW && (this.last_moving_direction!==RIGHT_ARROW)) {
-		s.dir(-1, 0);
-		this.last_moving_direction = keyCode;
+			s.dir(-1, 0);
+			this.last_moving_direction = keyCode;
+			s.x += s.xspeed*diffLevel;
 	}
 }
