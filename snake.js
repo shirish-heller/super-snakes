@@ -49,7 +49,7 @@ function snake() {
 				setTimeout(function() {
 					this.s.pellet_active = false;
 					pelletPosition= undefined;
-				}, 10000);
+				}, 7000);
 			}
 		}
 
@@ -115,7 +115,7 @@ function snake() {
 			this.ate_super = true;
 			setTimeout(function() {
 			this.s.ate_super = false;
-			}, 8000);
+			}, 12000);
 			pelletPosition= undefined;
 		}
 		
