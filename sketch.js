@@ -4,7 +4,7 @@ var foodPosition;
 var pelletPosition;
 var gameOver =false;
 var pellet_flag_tracker = [];
-var gameSpeed=15;
+var gameSpeed=10;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
