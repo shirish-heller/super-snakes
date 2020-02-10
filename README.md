@@ -1,10 +1,11 @@
+![Game Demo](https://github.com/shirish-heller/super-snakes/blob/master/demo.png)
 # super-snakes
-super-snakes game written in Javascript
+super-snakes game written in Javascript. A super power twist to the classic arcade snakes game.
 
 # STEPS TO RUN
 
-1) npm install -g p5-cli to install P5 library cli.
-2) cd into my_collections folder in cmd and write #p5 serve -p \<portNo\>
+1) run npm install and npm install -g p5-cli to install dependencies.
+2) run p5 serve -p \<portNo\>
 3) Go to your browser and go to localhost:\<portNo\>
 4) Enjoy and play.
   
