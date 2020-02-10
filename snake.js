@@ -49,7 +49,7 @@ function snake() {
 				setTimeout(function() {
 					this.s.pellet_active = false;
 					pelletPosition= undefined;
-				}, 6000);
+				}, 10000);
 			}
 		}
 
